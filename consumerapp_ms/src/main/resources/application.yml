@@ -1,0 +1,24 @@
+
+server:
+  port: 8089
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://xxxxxxxx@cluster0.mogoe82.mongodb.net/outbox-consumer-db?retryWrites=true&w=majority
+      database: outbox-consumer-db
+      minPoolSize: 10
+      maxPoolSize: 50
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:29092
+      outbox:
+        groupId: outbox-service
+        topicName: cdc-outbox-topic
+      concurrency: 4
+      enable-auto-commit: false
+      retryCount: 3
+      backoffIntervalMillis: 3000
+      maxPollIntervalMs: 12000000
+      maxPollRecords: 100
+      sessionTimeoutMs: 10000
+      fetchMaxBytes: 52428800
